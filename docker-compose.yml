@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # Redis for caching
+  redis:
+    image: redis:7-alpine
+    container_name: learning_curator_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    networks:
+      - curator_network
+
+  # FastAPI Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: learning_curator_app
+    ports:
+      - "8000:8000"
+    environment:
+      - ENV=prod
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - AWS_REGION=${AWS_REGION:-us-west-2}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - PARALLEL_API_KEY=${PARALLEL_API_KEY}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      - ./config:/app/config:ro
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - curator_network
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+    driver: local
+
+networks:
+  curator_network:
+    driver: bridge
+

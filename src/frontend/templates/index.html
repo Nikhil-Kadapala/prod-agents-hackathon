@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Resource Curator</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 Learning Resource Curator</h1>
+            <p class="subtitle">AI-powered personalized learning path generator</p>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <form id="analysisForm">
+                    <div class="form-group">
+                        <label for="targetJob">Target Job Title *</label>
+                        <input type="text" id="targetJob" name="targetJob" 
+                               placeholder="e.g., Senior Full Stack Engineer" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="resume">Resume/CV *</label>
+                        <textarea id="resume" name="resume" rows="10" 
+                                  placeholder="Paste your resume here..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jobDescription">Job Description *</label>
+                        <textarea id="jobDescription" name="jobDescription" rows="10" 
+                                  placeholder="Paste the target job description here..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="freeOnly" name="freeOnly" checked>
+                            Free resources only
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="analyzeBtn">
+                        Analyze & Curate Resources
+                    </button>
+                </form>
+            </section>
+
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing your profile and curating resources...</p>
+                </div>
+
+                <div id="results" style="display: none;">
+                    <h2>Analysis Results</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="skillGapsCount">0</div>
+                            <div class="stat-label">Skill Gaps Identified</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="resourcesCount">0</div>
+                            <div class="stat-label">Resources Curated</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="existingSkillsCount">0</div>
+                            <div class="stat-label">Existing Skills</div>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <div class="existing-skills">
+                        <h3>📊 Your Existing Skills</h3>
+                        <div id="existingSkillsList"></div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <div class="skill-gaps">
+                        <h3>🎯 Skill Gaps & Learning Resources</h3>
+                        <div id="skillGapsList"></div>
+                    </div>
+                </div>
+
+                <div id="error" style="display: none;" class="error-message">
+                    <h3>⚠️ Error</h3>
+                    <p id="errorMessage"></p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Powered by Claude 3.5 Sonnet | Built for Production AI Agents Hackathon</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
+

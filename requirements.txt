@@ -1,0 +1,56 @@
+# Core Web Framework
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+pydantic>=2.10.3
+pydantic-settings>=2.6.1
+python-multipart==0.0.18
+
+# Claude Agent SDK (for autonomous agents)
+claude-agent-sdk>=0.1.0  # Python Agent SDK
+anthropic==0.40.0  # Fallback for direct API calls
+
+# Redis
+redis==5.2.0
+redisvl==0.3.9
+
+# HTTP Clients
+httpx==0.28.1
+aiohttp==3.11.10
+requests==2.32.3
+
+# Parallel API
+parallel-web>=0.3.0
+
+# Utilities
+python-dotenv==1.0.1
+pyyaml==6.0.2
+tenacity==9.0.0
+
+# Testing
+pytest==8.3.4
+pytest-asyncio==0.24.0
+pytest-cov==6.0.0
+pytest-mock==3.14.0
+
+# Development
+black==24.10.0
+flake8==7.1.1
+mypy==1.13.0
+isort==5.13.2
+
+# Logging
+structlog==24.4.0
+
+# ============================================
+# Phase 3 Optional Dependencies
+# ============================================
+# Uncomment when implementing Phase 3 features
+# 
+# PII & Security (Skyflow)
+# skyflow>=1.5.0  # Official Skyflow Python SDK
+#                 # Docs: https://docs.skyflow.com/docs/sdks/overview
+# 
+# NotebookLM API
+# Note: NotebookLM API may not have a public Python SDK yet
+# You may need to use direct HTTP requests instead
+
